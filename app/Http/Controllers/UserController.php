@@ -63,6 +63,13 @@ class UserController extends Controller
 
     public function logout()
     {
+        // убираем отметку CKFinder
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        unset($_SESSION['ckfinder_admin']);
+        session_write_close();
+
         Auth::logout();
 
         return redirect()->route('login.create');

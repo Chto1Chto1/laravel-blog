@@ -14,6 +14,17 @@
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins') }}/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/admin') }}/css/adminlte.min.css">
+    <!-- CKEditor 5 -->
+    <link rel="stylesheet" href="{{ asset('assets/admin') }}/ckeditor5/ckeditor5.css">
+    <style>
+        /* минимальная высота поля визуального редактора */
+        .ck-editor__editable_inline {
+            min-height: 150px;
+        }
+        #content + .ck-editor .ck-editor__editable_inline {
+            min-height: 350px;
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -328,6 +339,62 @@
 <script src="{{ asset('assets/admin') }}/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets/admin') }}/js/demo.js"></script>
+<!-- CKEditor 5 -->
+<script src="{{ asset('assets/admin') }}/ckeditor5/ckeditor5.umd.js"></script>
+<!-- CKFinder -->
+<script src="{{ asset('assets/admin') }}/ckfinder/ckfinder.js"></script>
+<script>
+    const {
+        ClassicEditor, Essentials, Paragraph, Heading, Bold, Italic, Link,
+        List, BlockQuote, Alignment, Table, TableToolbar, MediaEmbed,
+        Image, ImageToolbar, ImageCaption, ImageStyle, ImageUpload,
+        CKFinder: CKFinderPlugin, CKFinderUploadAdapter
+    } = CKEDITOR;
+
+    // Цитата: минимальная панель
+    if (document.querySelector('#description')) {
+        ClassicEditor
+            .create(document.querySelector('#description'), {
+                licenseKey: 'GPL',
+                plugins: [Essentials, Paragraph, Bold, Italic],
+                toolbar: ['undo', 'redo', '|', 'bold', 'italic']
+            })
+            .catch(error => console.error(error));
+    }
+
+    // Контент: расширенная панель
+    if (document.querySelector('#content')) {
+        ClassicEditor
+            .create(document.querySelector('#content'), {
+                licenseKey: 'GPL',
+                plugins: [
+                    Essentials, Paragraph, Heading, Bold, Italic, Link,
+                    List, BlockQuote, Alignment, Table, TableToolbar, MediaEmbed,
+                    Image, ImageToolbar, ImageCaption, ImageStyle, ImageUpload,
+                    CKFinderPlugin, CKFinderUploadAdapter
+                ],
+                toolbar: [
+                    'undo', 'redo', '|', 'heading', '|',
+                    'bold', 'italic', 'link', '|',
+                    'bulletedList', 'numberedList', 'blockQuote', '|',
+                    'alignment', 'ckfinder', 'insertTable', 'mediaEmbed'
+                ],
+                ckfinder: {
+                    uploadUrl: '{{ asset('assets/admin') }}/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json'
+                },
+                image: {
+                    toolbar: [
+                        'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
+                        '|', 'toggleImageCaption', 'imageTextAlternative'
+                    ]
+                },
+                table: {
+                    contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
+                }
+            })
+            .catch(error => console.error(error));
+    }
+</script>
 <script>
     // Select2: превращаем списки с классом select2 в удобный выбор с метками
     $('.select2').select2({
