@@ -66,7 +66,7 @@
                 </div>
             </form>
 
-            <a href="#" class="text-center">Уже зарегистрированы? Войти</a>
+            <a href="{{ route('login.create') }}" class="text-center">Уже зарегистрированы? Войти</a>
         </div>
     </div>
 </div>
