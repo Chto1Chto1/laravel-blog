@@ -197,22 +197,28 @@
           </li>
   
           <li class="nav-item">
-              <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
-                  <p>
-                      Пример меню
-                      <i class="right fas fa-angle-left"></i>
-                  </p>
-              </a>
-              <ul class="nav nav-treeview">
-                  <li class="nav-item">
-                      <a href="#" class="nav-link">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>Подпункт</p>
-                      </a>
-                  </li>
-              </ul>
-          </li>
+    <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-archive"></i>
+        <p>
+            Категории
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ route('categories.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Список категорий</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('categories.create') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Новая категория</p>
+            </a>
+        </li>
+    </ul>
+</li>
 
       </ul>
   </nav>
@@ -281,5 +287,14 @@
 <script src="{{ asset('assets/admin') }}/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets/admin') }}/js/demo.js"></script>
+<script>
+    $('.nav-sidebar a').each(function () {
+        let location = window.location.protocol + '//' + window.location.host + window.location.pathname;
+        if (this.href === location) {
+            $(this).addClass('active');
+            $(this).parents('.nav-item').addClass('menu-open');
+        }
+    });
+</script>
 </body>
 </html>
