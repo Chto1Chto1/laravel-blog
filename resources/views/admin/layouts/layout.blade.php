@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('assets/admin/plugins') }}/fontawesome-free/css/all.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('assets/admin/plugins') }}/select2/css/select2.min.css">
+    <link rel="stylesheet" href="{{ asset('assets/admin/plugins') }}/select2-bootstrap4-theme/select2-bootstrap4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('assets/admin') }}/css/adminlte.min.css">
 </head>
@@ -241,6 +244,30 @@
                         </ul>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-edit"></i>
+                            <p>
+                                Статьи
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('posts.index') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Список статей</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('posts.create') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Новая статья</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
@@ -295,12 +322,19 @@
 <script src="{{ asset('assets/admin/plugins') }}/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('assets/admin/plugins') }}/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="{{ asset('assets/admin/plugins') }}/select2/js/select2.full.min.js"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/admin') }}/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('assets/admin') }}/js/demo.js"></script>
-<!-- Подсветка текущего пункта меню -->
 <script>
+    // Select2: превращаем списки с классом select2 в удобный выбор с метками
+    $('.select2').select2({
+        theme: 'bootstrap4'
+    });
+
+    // Подсветка текущего пункта меню
     $('.nav-sidebar a').each(function () {
         let location = window.location.protocol + '//' + window.location.host + window.location.pathname;
         if (this.href === location) {
