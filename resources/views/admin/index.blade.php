@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="content-wrapper">
+
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
@@ -16,7 +16,6 @@
               <li class="breadcrumb-item active">Blank Page</li>
             </ol>
           </div>
-        </div>
       </div><!-- /.container-fluid -->
 
 @endsection
